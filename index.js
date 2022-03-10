@@ -184,7 +184,12 @@ else if(OPERATION == "query_commit"){
       var cropped = { data: [] };
       cropped["data"] = data["data"]["user"]["repository"]["edges"];
       // const orgs = data["data"]["user"]["repository"]["nodes"];
-      // var newOrgs = { data: [] };
+      var newOrgs = { data: [] };
+
+      for(var i = 0; i < cropped["data"].length; i++) { 
+        var obj = cropped["data"][i]["author"];
+        newOrgs["data"].push(obj);
+      }
   
       // for (var i = 0; i < orgs.length; i++) {
       //   var obj = orgs[i]["author"];
@@ -192,7 +197,7 @@ else if(OPERATION == "query_commit"){
       //  }
   
       console.log("Fetching the Pull Request Data.\n");
-      console.log(JSON.stringify(cropped))
+      console.log(JSON.stringify(newOrgs))
     })
     .catch((error) => console.log(JSON.stringify(error)));
 }
