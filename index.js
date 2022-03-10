@@ -181,13 +181,15 @@ else if(OPERATION == "query_commit"){
     .then((response) => response.text())
     .then((txt) => {
       const data = JSON.parse(txt);
-      const orgs = data["data"]["user"]["repository"]["nodes"];
-      var newOrgs = { data: [] };
+      var cropped = { data: [] };
+      cropped["data"] = data["data"]["user"]["repository"]["nodes"];
+      // const orgs = data["data"]["user"]["repository"]["nodes"];
+      // var newOrgs = { data: [] };
   
-      for (var i = 0; i < orgs.length; i++) {
-        var obj = orgs[i]["author"];
-        newOrgs["data"].push(obj);
-       }
+      // for (var i = 0; i < orgs.length; i++) {
+      //   var obj = orgs[i]["author"];
+      //   newOrgs["data"].push(obj);
+      //  }
   
       console.log("Fetching the Pull Request Data.\n");
       console.log(JSON.stringify(cropped))
