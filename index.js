@@ -188,6 +188,7 @@ else if(OPERATION == "query_commit"){
 
       for(var i = 0; i < cropped.length; i++) { 
         var obj = cropped[i]["message"];
+        console.log(JSON.stringify(cropped[i]["message"]));
         newOrgs["data"].push(obj);
       }
   
