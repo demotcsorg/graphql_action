@@ -187,7 +187,7 @@ else if(OPERATION == "query_commit"){
       var newOrgs = { data: [] };
 
       for(var i = 0; i < cropped["data"].length; i++) { 
-        var obj = cropped["data"][i]["author"];
+        var obj = cropped["data"][i]["node"];
         newOrgs["data"].push(obj);
       }
   
