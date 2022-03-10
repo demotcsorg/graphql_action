@@ -13,7 +13,7 @@ console.log(`Operation ${OPERATION}`);
 
 const query_org = {
   query: `query{
-	user(login: "${openSource.githubUserName}") {
+	  user(login: "${USERNAME}") {
 	    repositoriesContributedTo(last: 100){
 	      totalCount
 	      nodes{
@@ -31,7 +31,7 @@ const query_org = {
 const query_pinned_projects = {
   query: `
 	query { 
-	  user(login: "${openSource.githubUserName}") { 
+	  user(login: "${USERNAME}") { 
 	    pinnedItems(first: 6, types: REPOSITORY) {
 	      totalCount
 	      nodes{
@@ -58,7 +58,7 @@ const query_pinned_projects = {
 const query_commit = {
   query: `
   query {
-    user(login: "NisargShah1410"){
+    user(login: "${USERNAME}") {
       repository(name: "git_com"){
         ref(qualifiedName: "main"){
           target{
