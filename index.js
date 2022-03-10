@@ -80,7 +80,32 @@ const query_pr = {
 }
 	`,
 };
-
+const query_commit = {
+  query: `
+  query {
+    user(login: "NisargShah1410"){
+      repository(name: "git_com"){
+        ref(qualifiedName: "main"){
+          target{
+            ... on Commit{
+              history(first: 10){
+                edges{
+                  node{
+                    author{
+                      name
+                    }
+                    message
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+}
+  `,
+};
 
 const baseUrl = "https://api.github.com/graphql";
 
@@ -151,6 +176,28 @@ else if(OPERATION == "query_pr"){
       cropped["closed"] = closed;
       cropped["merged"] = merged;
       cropped["totalCount"] = cropped["data"].length;
+  
+      console.log("Fetching the Pull Request Data.\n");
+      console.log(JSON.stringify(cropped))
+    })
+    .catch((error) => console.log(JSON.stringify(error)));
+}
+else if(OPERATION == "query_commit"){
+  fetch(baseUrl, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(query_commit),
+  })
+    .then((response) => response.text())
+    .then((txt) => {
+      const data = JSON.parse(txt);
+      const orgs = data["data"]["user"]["repository"]["nodes"];
+      var newOrgs = { data: [] };
+  
+      for (var i = 0; i < orgs.length; i++) {
+        var obj = orgs[i]["author"];
+        newOrgs["data"].push(obj);
+       }
   
       console.log("Fetching the Pull Request Data.\n");
       console.log(JSON.stringify(cropped))
