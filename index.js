@@ -180,9 +180,9 @@ else if(OPERATION == "query_commit"){
   })
     .then((response) => response.text())
     .then((txt) => {
-      // const data = JSON.parse(txt);
-      // var cropped = { data: [] };
-      // cropped["data"] = data["data"]["user"]["repository"]["edges"];
+      const data = JSON.parse(txt);
+      var cropped = { data: [] };
+      cropped["data"] = data["data"]["user"]["repository"]["edges"];
       // const orgs = data["data"]["user"]["repository"]["nodes"];
       // var newOrgs = { data: [] };
   
@@ -191,30 +191,11 @@ else if(OPERATION == "query_commit"){
       //   newOrgs["data"].push(obj);
       //  }
   
-      
-      const data = JSON.parse(txt);
-      const projects = data["data"]["user"]["repository"]["edges"];
-      var newProjects = { data: [] };
-      for (var i = 0; i < projects.length; i++) {
-        var obj = projects[i];
-        var langobjs = obj["node"];
-        var newLangobjs = [];
-        for (var j = 0; j < langobjs.length; j++) {
-          newLangobjs.push({
-            name: langobjs[j]["name"],
-            message: langobjs[j]["message"],
-          });
-        }
-      obj["author"] = newLangobjs;
-      newProjects["data"].push(obj);
-      }
-    
       console.log("Fetching the Pull Request Data.\n");
       console.log(JSON.stringify(cropped))
     })
     .catch((error) => console.log(JSON.stringify(error)));
 }
-
 else{
   console.log('Not a valid Operation')
 }
