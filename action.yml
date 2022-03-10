@@ -1,0 +1,22 @@
+name: 'GH GraphQL API action'
+description: 'Custom Action For GraphQL'
+author: 'Saurabh Rai'
+
+inputs:
+  GITHUB_TOKEN:
+    description: 'GitHub token'
+    required: true
+  USERNAME:
+    description: 'Username of you'
+    required: true
+  OPERATION:
+    description: 'Operation you want'
+    required: true
+
+outputs:
+  outputofquery: # id of output
+    description: 'Output of query'
+
+runs:
+  using: 'node16'
+  main: 'index.js'
