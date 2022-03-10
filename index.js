@@ -119,7 +119,7 @@ fetch(baseUrl, {
         }
 
       console.log("Fetching the Contributed Organization Data.\n");
-      console.log(JSON.stringify(cropped))
+      console.log(JSON.stringify(newOrgs))
 
 
       
@@ -168,7 +168,7 @@ else if(OPERATION == "query_pinned_projects"){
       }
 
       console.log("Fetching the Pinned Projects Data.\n");
-      console.log(JSON.stringify(cropped))
+      console.log(JSON.stringify(newProjects))
     })
     .catch((error) => console.log(JSON.stringify(error)));
 }
