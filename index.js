@@ -182,7 +182,7 @@ else if(OPERATION == "query_commit"){
     .then((txt) => {
       const data = JSON.parse(txt);
       var cropped = { data: [] };
-      cropped["data"] = data["data"]["user"]["repository"]["nodes"];
+      cropped["data"] = data["data"]["user"]["repository"]["edges"];
       // const orgs = data["data"]["user"]["repository"]["nodes"];
       // var newOrgs = { data: [] };
   
