@@ -181,14 +181,12 @@ else if(OPERATION == "query_commit"){
     .then((response) => response.text())
     .then((txt) => {
       const data = JSON.parse(txt);
-      var cropped = { data: [] };
-      cropped["data"] = data["data"]["user"]["repository"]["edges"];
+      const cropped = data["data"]["user"]["repository"]["edges"];
       // const orgs = data["data"]["user"]["repository"]["nodes"];
       var newOrgs = { data: [] };
 
       for(var i = 0; i < cropped.length; i++) { 
-        var obj = cropped[i]["message"];
-        console.log(JSON.stringify(cropped[i]["message"]));
+        var obj = cropped[i]["node"];
         newOrgs["data"].push(obj);
       }
   
