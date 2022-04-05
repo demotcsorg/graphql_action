@@ -195,7 +195,7 @@ else if(OPERATION == "query_email"){
   fetch(baseUrl, {
     method: "POST",
     headers: headers,
-    body: JSON.stringify(query_pinned_projects),
+    body: JSON.stringify(query_email),
   })
     .then((response) => response.text())
     .then((txt) => {
@@ -203,7 +203,7 @@ else if(OPERATION == "query_email"){
       
       console.log("Fetching the Mail of Organization members.\n");
       console.log(txt);
-      
+
     })
     .catch((error) => console.log(JSON.stringify(error)));
 }
