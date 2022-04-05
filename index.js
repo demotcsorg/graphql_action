@@ -55,6 +55,23 @@ const query_pinned_projects = {
 	`,
 };
 
+const query_email = {
+  query: `query {
+    organization(login: "demotcsorg"){
+      membersWithRole(first: 10){
+        edges{
+          cursor
+          node{
+            name
+            login
+            email
+          }
+        }
+      }
+    }
+  }`,
+};
+
 const query_commit = {
   query: `
   query {
@@ -172,6 +189,24 @@ else if(OPERATION == "query_pinned_projects"){
     })
     .catch((error) => console.log(JSON.stringify(error)));
 }
+
+else if(OPERATION == "query_email"){
+
+  fetch(baseUrl, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(query_pinned_projects),
+  })
+    .then((response) => response.text())
+    .then((txt) => {
+      const data = JSON.parse(txt);
+      
+      console.log("Fetching the Mail of Organization members.\n");
+      console.log(txt);
+    })
+    .catch((error) => console.log(JSON.stringify(error)));
+}
+
 else if(OPERATION == "query_commit"){
   fetch(baseUrl, {
     method: "POST",
