@@ -203,6 +203,7 @@ else if(OPERATION == "query_email"){
       
       console.log("Fetching the Mail of Organization members.\n");
       console.log(txt);
+      
     })
     .catch((error) => console.log(JSON.stringify(error)));
 }
