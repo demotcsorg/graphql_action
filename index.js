@@ -75,7 +75,7 @@ const query_email = {
 const query_commit = {
   query: `
   query {
-    user(login: "${USERNAME}") {
+    repositoryOwner(login: "NisargShah1410"){
       repository(name: "git_com"){
         ref(qualifiedName: "main"){
           target{
@@ -95,7 +95,7 @@ const query_commit = {
         }
       }
     }
-}
+  }
   `,
 };
 
@@ -215,25 +215,15 @@ else if(OPERATION == "query_commit"){
     body: JSON.stringify(query_commit),
   })
     .then((response) => response.text())
-    .then((txt) => {
+    .then((txt)=>{
       const data = JSON.parse(txt);
+      console.log(data);
       var cropped = { data: [] };
-      cropped["data"] = data["data"]["user"]["repository"]["edges"];
-      // const orgs = data["data"]["user"]["repository"]["nodes"];
-      var newOrgs = { data: [] };
-
-      for(var i = 0; i < cropped.length; i++) { 
-        var obj = cropped[i]["author"];
-        newOrgs["data"].push(obj);
-      }
-  
-      // for (var i = 0; i < orgs.length; i++) {
-      //   var obj = orgs[i]["author"];
-      //   newOrgs["data"].push(obj);
-      //  }
-  
-      console.log("Fetching the Pull Request Data.\n");
-      console.log(JSON.stringify(newOrgs))
+        cropped["data"] = data["data"]["repositoryOwner"]["repository"]["ref"]["target"]["history"]["edges"];
+      console.log("Printing Commit history details");
+        for(var i =0; i<cropped["data"].length; i++){
+        console.log(JSON.stringify(cropped["data"][i]["node"]));
+        }
     })
     .catch((error) => console.log(JSON.stringify(error)));
 }
